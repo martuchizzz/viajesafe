@@ -1376,8 +1376,6 @@ userCommentInput.addEventListener('input', () => {
 });
 
 form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
   const nombreValido = validateField(
     userNameInput,
     errorNombre,
@@ -1389,27 +1387,10 @@ form.addEventListener('submit', (e) => {
     'Por favor, escribí un comentario antes de enviar.'
   );
 
-  if (!nombreValido || !comentarioValido) return;
-
-  // Simular envío exitoso
-  form.style.opacity = '0';
-  form.style.transform = 'translateY(-10px)';
-  form.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-
-  setTimeout(() => {
-    form.style.display = 'none';
-    formSuccess.classList.remove('hidden');
-    formSuccess.style.opacity = '0';
-    formSuccess.style.transform = 'translateY(10px)';
-    formSuccess.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        formSuccess.style.opacity = '1';
-        formSuccess.style.transform = 'translateY(0)';
-      });
-    });
-  }, 350);
+  if (!nombreValido || !comentarioValido) {
+    e.preventDefault();
+    return;
+  }
 });
 
 // ---- SMOOTH ACTIVE LINK STYLE ----
